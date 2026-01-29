@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/home"
+        android:title="Acasa"
+        android:icon="@drawable/home_panel"
+        />
+
+    <item android:id="@+id/payment"
+        android:title="Plati"
+        android:icon="@drawable/payment_panel"
+        />
+
+    <item android:id="@+id/account"
+        android:title="Contul meu"
+        android:icon="@drawable/admin_panel"
+        />
+</menu>

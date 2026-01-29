@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Din contul -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Din contul"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/fromAccountNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RO34329572395028"
+            android:background="@drawable/rounded_corner"
+            android:padding="12dp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Catre Beneficiar -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Către Beneficiar"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/beneficiaryName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nume"
+            android:background="@drawable/rounded_corner"
+            android:padding="12dp"
+            android:layout_marginTop="4dp"/>
+
+        <EditText
+            android:id="@+id/beneficiaryAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Număr cont"
+            android:background="@drawable/rounded_corner"
+            android:padding="12dp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Detalii Plată -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalii Plată"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/paymentAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sumă"
+            android:background="@drawable/rounded_corner"
+            android:padding="12dp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Data Plății -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Plății"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/paymentDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ex: 23.11.2025"
+            android:background="@drawable/rounded_corner"
+            android:padding="12dp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Buton Continuă -->
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continuă"
+            android:textSize="18sp"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
