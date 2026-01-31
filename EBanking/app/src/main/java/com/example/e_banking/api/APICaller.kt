@@ -2,6 +2,8 @@ package com.example.e_banking.api
 
 import android.content.Context
 import android.widget.Toast
+import com.example.e_banking.api.callbacks.LoginCallback
+import com.example.e_banking.api.dtos.LoginDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -9,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
-object APIProvider {
+object APICaller {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl("http://10.0.2.2:5131/")
@@ -17,7 +19,7 @@ object APIProvider {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val api: APIService = retrofit.create(APIService::class.java)
+    private val api: RetrofitAPIDefinition = retrofit.create(RetrofitAPIDefinition::class.java)
 
     fun test(context: Context) {
         api.test().enqueue(
@@ -30,5 +32,9 @@ object APIProvider {
                 }
             }
         )
+    }
+
+    fun login(loginDto: LoginDto, loginCallback: LoginCallback) {
+        api.login(loginDto).enqueue(loginCallback)
     }
 }

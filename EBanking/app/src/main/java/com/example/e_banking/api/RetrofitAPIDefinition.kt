@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-interface APIService {
+interface RetrofitAPIDefinition {
 
     @GET("api/test")
     fun test(): Call<String>

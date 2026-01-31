@@ -7,9 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.e_banking.api.APIProvider
-import com.example.e_banking.api.SecurityContext
-import com.example.e_banking.api.callbacks.DefaultCallback
+import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.callbacks.LoginCallback
 import com.example.e_banking.api.dtos.LoginDto
 
@@ -46,8 +44,6 @@ class LoginActivity : AppCompatActivity() {
                 {
                     Log.i("LoginDebug", "Autentificare reușită ✅")
                     Toast.makeText(this, "Login cu succes!", Toast.LENGTH_SHORT).show()
-                    APIProvider.api.test(SecurityContext.authHeaderValue)
-                        .enqueue(DefaultCallback())
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
@@ -59,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             )
             val loginDto = LoginDto(email = username, password = password)
-            APIProvider.api.login(loginDto).enqueue(loginCallback)
+            APICaller.login(loginDto, loginCallback)
         }
         registerLButton.setOnClickListener {
             // Navigare către RegisterActivity
