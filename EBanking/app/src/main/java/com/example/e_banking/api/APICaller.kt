@@ -2,8 +2,10 @@ package com.example.e_banking.api
 
 import android.content.Context
 import android.widget.Toast
+import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.callbacks.LoginCallback
 import com.example.e_banking.api.dtos.LoginDto
+import com.example.e_banking.api.dtos.RegisterDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,5 +38,9 @@ object APICaller {
 
     fun login(loginDto: LoginDto, loginCallback: LoginCallback) {
         api.login(loginDto).enqueue(loginCallback)
+    }
+
+    fun register(registerDto: RegisterDto, registerCallback: DefaultCallback<Unit>) {
+        api.register(registerDto).enqueue(registerCallback)
     }
 }
