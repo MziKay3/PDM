@@ -7,12 +7,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast//sterge dupa test
 import androidx.appcompat.app.AppCompatActivity
-import com.example.e_banking.api.RetrofitBuilder
+import com.example.e_banking.api.APIProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.Console
-import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
     lateinit var usernameInput : EditText
@@ -33,21 +31,6 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val username = usernameInput.text.toString()
             val password = passwordInput.text.toString()
-
-            val context = this;
-
-            RetrofitBuilder.api.test().enqueue(
-                object : Callback<String> {
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        val responseBody = response.body();
-                        Toast.makeText(context, "success!", Toast.LENGTH_LONG).show()
-                    }
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        val someValue = "";
-                        Toast.makeText(context, "not succes!", Toast.LENGTH_LONG).show()
-                    }
-                }
-            )
 
 //////////////////////chestii de test login
             Log.i("Login", "Username: $username, Password: $password")
