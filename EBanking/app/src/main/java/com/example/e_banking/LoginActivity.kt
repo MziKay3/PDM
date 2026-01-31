@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast//sterge dupa test
 import androidx.appcompat.app.AppCompatActivity
 import com.example.e_banking.api.APIProvider
+import com.example.e_banking.api.LoginCallback
+import com.example.e_banking.api.dtos.LoginDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,19 +45,23 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Completează toate câmpurile", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (username == correctUsername && password == correctPassword) {
-                Log.i("LoginDebug", "Autentificare reușită ✅")
-                Toast.makeText(this, "Login cu succes!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
-            }
-            else {
-                Log.i("LoginDebug", "Autentificare eșuată ❌")
-                Toast.makeText(this, "Username sau parola incorecte", Toast.LENGTH_SHORT).show()
-            }
 
+            val loginCallback = LoginCallback(
+                {
+                    Log.i("LoginDebug", "Autentificare reușită ✅")
+                    Toast.makeText(this, "Login cu succes!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                },
+                {
+                    Log.i("LoginDebug", "Autentificare eșuată ❌")
+                    Toast.makeText(this, "Username sau parola incorecte", Toast.LENGTH_SHORT).show()
+                }
+            )
+            val loginDto = LoginDto(email = username, password = password)
+            APIProvider.api.login(loginDto).enqueue(loginCallback)
         }
         registerLButton.setOnClickListener {
             // Navigare către RegisterActivity

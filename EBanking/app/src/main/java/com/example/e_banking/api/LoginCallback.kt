@@ -4,28 +4,35 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginCallback : Callback<String>, SecurityContextAccessor {
-
+class LoginCallback(val onLoginSuccess: (() -> Unit)? = null, val onLoginFailure: (() -> Unit)? = null) : Callback<String>, SecurityContextAccessor {
     private val unauthorized = 403
 
     override fun onResponse(
         call: Call<String?>,
         response: Response<String?>) {
 
-        if (response.code() == unauthorized)
+        if (response.code() == unauthorized) {
+            onLoginFailure?.invoke()
             return
-
-        if (response.isSuccessful)
-        {
-            val token = response.body()
-            if (token == null)
-                return
-
-            SecurityContext.setToken(token, this)
         }
+
+        if (!response.isSuccessful) {
+            onLoginFailure?.invoke()
+            return
+        }
+
+        val token = response.body()
+        if (token == null) {
+            onLoginFailure?.invoke()
+            return
+        }
+
+        onLoginSuccess
+        SecurityContext.setToken(token, this)
     }
 
     override fun onFailure(call: Call<String?>, t: Throwable) {
+        onLoginFailure?.invoke()
         throw t
     }
 }
