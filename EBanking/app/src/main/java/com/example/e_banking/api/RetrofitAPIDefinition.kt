@@ -1,6 +1,7 @@
 package com.example.e_banking.api
 
 import com.example.e_banking.api.dtos.LoginDto
+import com.example.e_banking.api.dtos.RegisterDto
 import com.example.e_banking.api.dtos.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -18,4 +19,7 @@ interface RetrofitAPIDefinition {
 
     @POST("api/auth/login")
     fun login(@Body loginDto: LoginDto): Call<String>
+
+    @POST("api/auth/register")
+    fun register(@Body registerDto: RegisterDto): Call<Unit>
 }

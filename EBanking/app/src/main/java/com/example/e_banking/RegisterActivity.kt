@@ -1,10 +1,15 @@
 package com.example.e_banking
 //RegisterActivity.kt
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.e_banking.api.APICaller
+import com.example.e_banking.api.callbacks.DefaultCallback
+import com.example.e_banking.api.dtos.RegisterDto
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var usernameInputR : EditText
@@ -30,6 +35,31 @@ class RegisterActivity : AppCompatActivity() {
             val password = passwordInputR.text.toString()
             val phoneNumber = phoneNumberInput.text.toString()
             val name = nameInput.text.toString()
+
+            val registerDto = RegisterDto(
+                name = name,
+                phoneNumber = phoneNumber,
+                email = username,
+                password = password
+            )
+            val callback = DefaultCallback<Unit>(
+                onSuccess = {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    this.finish()
+                },
+                onFailure = {
+                    response ->
+                    response.errorBody()?.let {
+                        val message = it.string()
+                        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            )
+
+            APICaller.register(registerDto, callback)
+
             //TODO: Register logic
             Log.i("Register", "Username: $username, Password: $password, Phone Number: $phoneNumber")
         }
