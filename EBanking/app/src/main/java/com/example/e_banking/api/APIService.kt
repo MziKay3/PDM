@@ -1,8 +1,9 @@
 package com.example.e_banking.api
 
 import com.example.e_banking.api.dtos.LoginDto
-import retrofit2.http.GET
 import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface APIService {
@@ -11,5 +12,5 @@ interface APIService {
     fun test(): Call<String>
 
     @POST("api/auth/login")
-    fun login(loginDto: LoginDto): Call<String>
+    fun login(@Body loginDto: LoginDto): Call<String>
 }

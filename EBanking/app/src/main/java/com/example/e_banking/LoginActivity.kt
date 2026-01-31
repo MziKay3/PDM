@@ -2,17 +2,14 @@ package com.example.e_banking
 //LoginActivity.kt
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log//sterge dupa test
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast//sterge dupa test
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.e_banking.api.APIProvider
 import com.example.e_banking.api.LoginCallback
 import com.example.e_banking.api.dtos.LoginDto
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     lateinit var usernameInput : EditText
@@ -61,7 +58,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             )
             val loginDto = LoginDto(email = username, password = password)
-            APIProvider.api.login(loginDto).enqueue(loginCallback)
+            APIProvider.test(this)
+//            APIProvider.api.login(loginDto).enqueue(loginCallback)
         }
         registerLButton.setOnClickListener {
             // Navigare către RegisterActivity
