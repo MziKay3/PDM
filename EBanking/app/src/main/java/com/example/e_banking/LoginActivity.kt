@@ -8,7 +8,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.e_banking.api.APIProvider
-import com.example.e_banking.api.LoginCallback
+import com.example.e_banking.api.SecurityContext
+import com.example.e_banking.api.callbacks.DefaultCallback
+import com.example.e_banking.api.callbacks.LoginCallback
 import com.example.e_banking.api.dtos.LoginDto
 
 class LoginActivity : AppCompatActivity() {
@@ -28,25 +30,24 @@ class LoginActivity : AppCompatActivity() {
         registerLButton = findViewById(R.id.registerl_button)
 
         loginButton.setOnClickListener {
-            val username = usernameInput.text.toString()
-            val password = passwordInput.text.toString()
+//            val username = usernameInput.text.toString()
+//            val password = passwordInput.text.toString()
+            val username = "admin@gmail.com"
+            val password = "pass"
 
-//////////////////////chestii de test login
             Log.i("Login", "Username: $username, Password: $password")
-            //TODO: Login logic
 
-            val correctUsername = "admin"
-            val correctPassword = "1234"
-
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Completează toate câmpurile", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+//            if (username.isEmpty() || password.isEmpty()) {
+//                Toast.makeText(this, "Completează toate câmpurile", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
 
             val loginCallback = LoginCallback(
                 {
                     Log.i("LoginDebug", "Autentificare reușită ✅")
                     Toast.makeText(this, "Login cu succes!", Toast.LENGTH_SHORT).show()
+                    APIProvider.api.test(SecurityContext.authHeaderValue)
+                        .enqueue(DefaultCallback())
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)

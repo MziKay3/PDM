@@ -23,11 +23,9 @@ object APIProvider {
         api.test().enqueue(
             object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    val responseBody = response.body();
                     Toast.makeText(context, "success!", Toast.LENGTH_LONG).show()
                 }
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    val someValue = "";
                     Toast.makeText(context, "not succes!", Toast.LENGTH_LONG).show()
                 }
             }
