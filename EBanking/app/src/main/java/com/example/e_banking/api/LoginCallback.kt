@@ -27,12 +27,11 @@ class LoginCallback(val onLoginSuccess: (() -> Unit)? = null, val onLoginFailure
             return
         }
 
-        onLoginSuccess
+        onLoginSuccess?.invoke()
         SecurityContext.setToken(token, this)
     }
 
     override fun onFailure(call: Call<String?>, t: Throwable) {
-        onLoginFailure?.invoke()
         throw t
     }
 }

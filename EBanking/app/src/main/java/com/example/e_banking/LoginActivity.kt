@@ -58,8 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             )
             val loginDto = LoginDto(email = username, password = password)
-            APIProvider.test(this)
-//            APIProvider.api.login(loginDto).enqueue(loginCallback)
+            APIProvider.api.login(loginDto).enqueue(loginCallback)
         }
         registerLButton.setOnClickListener {
             // Navigare către RegisterActivity
