@@ -29,9 +29,7 @@ class RegisterActivity : AppCompatActivity() {
         nameInput = findViewById(R.id.name_input)
         registerButton = findViewById(R.id.register_button)
 
-        registerButton.setOnClickListener({
-            onRegisterClick()
-        })
+        registerButton.setOnClickListener { onRegisterClick() }
 
     }
 
