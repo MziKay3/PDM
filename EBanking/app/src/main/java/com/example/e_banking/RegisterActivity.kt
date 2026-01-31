@@ -29,40 +29,49 @@ class RegisterActivity : AppCompatActivity() {
         nameInput = findViewById(R.id.name_input)
         registerButton = findViewById(R.id.register_button)
 
+        registerButton.setOnClickListener({
+            onRegisterClick()
+        })
 
-        registerButton.setOnClickListener {
-            val username = usernameInputR.text.toString()
-            val password = passwordInputR.text.toString()
-            val phoneNumber = phoneNumberInput.text.toString()
-            val name = nameInput.text.toString()
+    }
 
-            val registerDto = RegisterDto(
-                name = name,
-                phoneNumber = phoneNumber,
-                email = username,
-                password = password
-            )
-            val callback = DefaultCallback<Unit>(
-                onSuccess = {
-                    val intent = Intent(this, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    this.finish()
-                },
-                onFailure = {
-                    response ->
-                    response.errorBody()?.let {
-                        val message = it.string()
-                        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            )
+    fun onRegisterClick() {
+        val name = nameInput.text.toString()
+        val phoneNumber = phoneNumberInput.text.toString()
+        val email = usernameInputR.text.toString()
+        val password = passwordInputR.text.toString()
 
-            APICaller.register(registerDto, callback)
-
-            //TODO: Register logic
-            Log.i("Register", "Username: $username, Password: $password, Phone Number: $phoneNumber")
+        if (name.isEmpty() || phoneNumber.isEmpty() ||
+            email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Completează toate câmpurile", Toast.LENGTH_SHORT)
+                .show()
+            return
         }
 
+        val registerDto = RegisterDto(
+            name = name,
+            phoneNumber = phoneNumber,
+            email = email,
+            password = password
+        )
+        val callback = DefaultCallback<Unit>(
+            onSuccess = {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                this.finish()
+            },
+            onFailure = {
+                    response ->
+                response.errorBody()?.let {
+                    val message = it.string()
+                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                }
+            }
+        )
+
+        APICaller.register(registerDto, callback)
+
+        Log.i("Register", "Username: $email, Password: $password, Phone Number: $phoneNumber")
     }
 }

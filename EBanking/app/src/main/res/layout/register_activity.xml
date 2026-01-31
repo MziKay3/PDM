@@ -19,12 +19,12 @@
             android:src="@drawable/register_logo" />
 
         <EditText
-            android:id="@+id/phonenumber_input"
+            android:id="@+id/name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:hint="Telefon"
-            android:inputType="phone"
+            android:hint="Nume si Prenume"
+            android:inputType="textPersonName"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
@@ -32,12 +32,12 @@
             android:background="@drawable/rounded_corner" />
 
         <EditText
-            android:id="@+id/name_input"
+            android:id="@+id/phonenumber_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Nume si Prenume"
-            android:inputType="textPersonName"
+            android:hint="Telefon"
+            android:inputType="phone"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
