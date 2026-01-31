@@ -60,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
                 this.finish()
             },
             onFailure = {
-                    response ->
+                response ->
                 response.errorBody()?.let {
                     val message = it.string()
                     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
