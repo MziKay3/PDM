@@ -2,6 +2,7 @@ package com.example.e_banking.api
 
 import com.example.e_banking.api.dtos.AccountDetails
 import com.example.e_banking.api.dtos.LoginDto
+import com.example.e_banking.api.dtos.PaymentRequest
 import com.example.e_banking.api.dtos.RegisterDto
 import com.example.e_banking.api.dtos.UpdateUserDetails
 import com.example.e_banking.api.dtos.User
@@ -28,7 +29,8 @@ interface RetrofitAPIDefinition {
     fun register(@Body registerDto: RegisterDto): Call<Unit>
 
     @GET("api/user/user-details")
-    fun getUserDetails(@Header("Authorization") authHeaderValue: String): Call<UserDetails>
+    fun getUserDetails(@Header("Authorization") authHeaderValue: String):
+            Call<UserDetails>
 
     @PUT("api/user/user-details")
     fun updateUserDetails(
@@ -37,5 +39,13 @@ interface RetrofitAPIDefinition {
     ): Call<Unit>
 
     @GET("api/account/account-details")
-    fun getAccountDetails(@Header("Authorization") authHeaderValue: String): Call<AccountDetails>
+    fun getAccountDetails(@Header("Authorization") authHeaderValue: String):
+            Call<AccountDetails>
+
+    @GET("api/payment/one-time")
+    fun makeOneTimePayment(
+        @Header("Authorization") authHeaderValue: String,
+        @Body paymentRequest: PaymentRequest
+    ): Call<Unit>
+
 }

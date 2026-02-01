@@ -6,6 +6,7 @@ import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.callbacks.LoginCallback
 import com.example.e_banking.api.dtos.AccountDetails
 import com.example.e_banking.api.dtos.LoginDto
+import com.example.e_banking.api.dtos.PaymentRequest
 import com.example.e_banking.api.dtos.RegisterDto
 import com.example.e_banking.api.dtos.UpdateUserDetails
 import com.example.e_banking.api.dtos.UserDetails
@@ -60,6 +61,13 @@ object APICaller {
 
     fun getAccountDetails(callback: DefaultCallback<AccountDetails>) {
         api.getAccountDetails(SecurityContext.authHeaderValue)
+            .enqueue(callback)
+    }
+
+    fun makeOneTimePayment(paymentRequest: PaymentRequest, callback: DefaultCallback<Unit>) {
+        api.makeOneTimePayment(
+            SecurityContext.authHeaderValue,
+            paymentRequest)
             .enqueue(callback)
     }
 }
