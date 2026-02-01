@@ -25,6 +25,16 @@ class AdminFragment : Fragment(), SecurityContextAccessor {
     lateinit var initialPassword: String
     lateinit var onUserDetailsGetCallback: DefaultCallback<UserDetails>
 
+    private lateinit var btnEditName: ImageButton
+    private lateinit var btnEditPhone: ImageButton
+    private lateinit var btnEditPassword: ImageButton
+    private lateinit var btnUpdate: Button
+
+    private lateinit var inputName: EditText
+    private lateinit var viewEmail: TextView
+    private lateinit var inputPhone: EditText
+    private lateinit var inputPassword: EditText
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,41 +51,18 @@ class AdminFragment : Fragment(), SecurityContextAccessor {
             startActivity(intent)
             requireActivity().finish()
         }
-        val inputName = view.findViewById<EditText>(R.id.inputName)
-        val viewEmail = view.findViewById<TextView>(R.id.inputEmail)
-        val inputPhone = view.findViewById<EditText>(R.id.inputPhone)
-        val inputPassword = view.findViewById<EditText>(R.id.inputPassword)
+        inputName = view.findViewById(R.id.inputName)
+        viewEmail = view.findViewById(R.id.inputEmail)
+        inputPhone = view.findViewById(R.id.inputPhone)
+        inputPassword = view.findViewById(R.id.inputPassword)
+        btnEditName = view.findViewById(R.id.btnEditName)
+        btnEditPhone = view.findViewById(R.id.btnEditPhone)
+        btnEditPassword = view.findViewById(R.id.btnEditPassword)
+        btnUpdate = view.findViewById(R.id.update_user_details_button)
 
-        onUserDetailsGetCallback = DefaultCallback(
-            onSuccess = {
-                response ->
-
-                inputName.setText(response.name)
-                initialName = response.name
-
-                viewEmail.text = response.email
-
-                inputPhone.setText(response.phoneNumber)
-                initialPhone = response.phoneNumber
-
-                inputPassword.setText(response.password)
-                initialPassword = response.password
-            },
-            onFailure = {
-                response ->
-                response.errorBody()?.let {
-                    val message = it.string()
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
-                        .show()
-                }
-            }
-        )
+        onUserDetailsGetCallback = getUserDetailsCallBack()
         APICaller.getUserDetails(onUserDetailsGetCallback)
 
-        val btnEditName = view.findViewById<ImageButton>(R.id.btnEditName)
-        val btnEditPhone = view.findViewById<ImageButton>(R.id.btnEditPhone)
-        val btnEditPassword = view.findViewById<ImageButton>(R.id.btnEditPassword)
-        val btnUpdate = view.findViewById<Button>(R.id.update_user_details_button)
         btnUpdate.setOnClickListener {
             val name = if (inputName.isEnabled) inputName.text.toString()
             else initialName
@@ -88,21 +75,7 @@ class AdminFragment : Fragment(), SecurityContextAccessor {
                 phoneNumber = phoneNumber,
                 password = password
             )
-            APICaller.updateUserDetails(updateUserDetails,
-                DefaultCallback(
-                    onSuccess = {
-                        _ ->
-                        APICaller.getUserDetails(onUserDetailsGetCallback)
-                    },
-                    onFailure = {
-                        response ->
-                        response.errorBody()?.let {
-                            val message = it.string()
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
-                ))
+            APICaller.updateUserDetails(updateUserDetails, getUpdateCallBack())
         }
 
         btnEditName.setOnClickListener {
@@ -137,5 +110,53 @@ class AdminFragment : Fragment(), SecurityContextAccessor {
         }
 
         return view
+    }
+
+    private fun getUserDetailsCallBack() : DefaultCallback<UserDetails> {
+        return DefaultCallback(
+            onSuccess = {
+                response ->
+
+                inputName.isEnabled = false
+                inputPhone.isEnabled = false
+                inputPassword.isEnabled = false
+
+                inputName.setText(response.name)
+                initialName = response.name
+
+                viewEmail.text = response.email
+
+                inputPhone.setText(response.phoneNumber)
+                initialPhone = response.phoneNumber
+
+                inputPassword.setText(response.password)
+                initialPassword = response.password
+            },
+            onFailure = {
+                    response ->
+                response.errorBody()?.let {
+                    val message = it.string()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        )
+    }
+
+    private fun getUpdateCallBack() : DefaultCallback<Unit> {
+        return DefaultCallback(
+            onSuccess = {
+                _ ->
+                APICaller.getUserDetails(onUserDetailsGetCallback)
+            },
+            onFailure = {
+                response ->
+                response.errorBody()?.let {
+                    val message = it.string()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        )
     }
 }
