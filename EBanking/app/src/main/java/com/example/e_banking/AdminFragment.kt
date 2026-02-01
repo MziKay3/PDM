@@ -10,7 +10,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.text.InputType
-class AdminFragment : Fragment() {
+import com.example.e_banking.api.SecurityContext
+import com.example.e_banking.api.SecurityContextAccessor
+
+class AdminFragment : Fragment(), SecurityContextAccessor {
 
 
     override fun onCreateView(
@@ -22,6 +25,7 @@ class AdminFragment : Fragment() {
 
         val logoutButton = view.findViewById<Button>(R.id.logout_button)
         logoutButton.setOnClickListener {
+            SecurityContext.logout(this)
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             // Curăță stiva de activități ca să nu poți reveni cu back
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
