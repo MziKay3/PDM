@@ -4,8 +4,12 @@ import android.content.Context
 import android.widget.Toast
 import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.callbacks.LoginCallback
+import com.example.e_banking.api.dtos.AccountDetails
 import com.example.e_banking.api.dtos.LoginDto
+import com.example.e_banking.api.dtos.PaymentRequest
 import com.example.e_banking.api.dtos.RegisterDto
+import com.example.e_banking.api.dtos.UpdateUserDetails
+import com.example.e_banking.api.dtos.UserDetails
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,5 +46,28 @@ object APICaller {
 
     fun register(registerDto: RegisterDto, registerCallback: DefaultCallback<Unit>) {
         api.register(registerDto).enqueue(registerCallback)
+    }
+
+    fun getUserDetails(callback: DefaultCallback<UserDetails>) {
+        api.getUserDetails(SecurityContext.authHeaderValue).enqueue(callback)
+    }
+
+    fun updateUserDetails(updateUserDetails: UpdateUserDetails, callback: DefaultCallback<Unit>) {
+        api.updateUserDetails(
+            SecurityContext.authHeaderValue,
+            updateUserDetails
+        ).enqueue(callback)
+    }
+
+    fun getAccountDetails(callback: DefaultCallback<AccountDetails>) {
+        api.getAccountDetails(SecurityContext.authHeaderValue)
+            .enqueue(callback)
+    }
+
+    fun makeOneTimePayment(paymentRequest: PaymentRequest, callback: DefaultCallback<Unit>) {
+        api.makeOneTimePayment(
+            SecurityContext.authHeaderValue,
+            paymentRequest)
+            .enqueue(callback)
     }
 }

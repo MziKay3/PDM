@@ -10,43 +10,47 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import android.widget.TextView
 
-class PaymentFragment : Fragment() {
+class PaymentFragment : Fragment(R.layout.fragment_payment) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_payment, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val chipNew = view.findViewById<Chip>(R.id.chipNewPayment)
         val chipRecurring = view.findViewById<Chip>(R.id.chipRecurring)
-        val containerFrame = view.findViewById<FrameLayout>(R.id.paymentContentContainer)
 
-        // Inflate layouts pentru fiecare secțiune
-        val newPaymentView = inflater.inflate(R.layout.payment_new, containerFrame, false)
-        val recurringPaymentView = inflater.inflate(R.layout.payment_recurring, containerFrame, false)
+        if (savedInstanceState == null) {
+            showNewPayment()
+            chipNew.isChecked = true
+        }
 
-        // La început afișăm “Plată nouă”
-        containerFrame.removeAllViews()
-        containerFrame.addView(newPaymentView)
-        chipNew.isChecked = true
-        chipRecurring.isChecked = false
-
-        // Click pe chip-uri
         chipNew.setOnClickListener {
-            containerFrame.removeAllViews()
-            containerFrame.addView(newPaymentView)
+            showNewPayment()
             chipNew.isChecked = true
             chipRecurring.isChecked = false
         }
 
         chipRecurring.setOnClickListener {
-            containerFrame.removeAllViews()
-            containerFrame.addView(recurringPaymentView)
+            showRecurringPayment()
             chipRecurring.isChecked = true
             chipNew.isChecked = false
         }
+    }
 
-        return view
+    private fun showNewPayment() {
+        childFragmentManager.beginTransaction()
+            .replace(
+                R.id.paymentContentContainer,
+                NewPaymentFragment()
+            )
+            .commit()
+    }
+
+    private fun showRecurringPayment() {
+        childFragmentManager.beginTransaction()
+            .replace(
+                R.id.paymentContentContainer,
+                RecurringPaymentFragment()
+            )
+            .commit()
     }
 }

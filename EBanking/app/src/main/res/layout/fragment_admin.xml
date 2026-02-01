@@ -13,11 +13,10 @@
             android:id="@+id/pageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Datele mele"
+            android:text="@string/user_details"
             android:textSize="30sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"/>
 
@@ -27,9 +26,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nume și prenume"
+            android:text="@string/name"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,15 +43,15 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Mezo Zoltan Kristian"
+                android:text=""
                 android:enabled="false"
                 android:padding="12dp"
                 android:background="@drawable/rounded_corner" />
 
             <ImageButton
                 android:id="@+id/btnEditName"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
                 android:src="@android:drawable/ic_menu_edit" />
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mail"
+            android:text="@string/email"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -73,23 +73,15 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="16dp">
 
-            <EditText
+            <TextView
                 android:id="@+id/inputEmail"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="mezozoltan03@yahoo.com"
+                android:text=""
                 android:enabled="false"
                 android:padding="12dp"
                 android:background="@drawable/rounded_corner" />
-
-            <ImageButton
-                android:id="@+id/btnEditEmail"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                android:padding="6dp"
-                android:src="@android:drawable/ic_menu_edit" />
         </LinearLayout>
 
 
@@ -97,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Număr telefon"
+            android:text="@string/phone_number"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -113,15 +105,15 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="0783913427"
+                android:text=""
                 android:enabled="false"
                 android:padding="12dp"
                 android:background="@drawable/rounded_corner" />
 
             <ImageButton
                 android:id="@+id/btnEditPhone"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
                 android:src="@android:drawable/ic_menu_edit" />
@@ -132,7 +124,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Parola"
+            android:text="@string/password"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -147,7 +139,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="xxxxxxxx"
+                android:text=""
                 android:enabled="false"
                 android:inputType="textPassword"
                 android:padding="12dp"
@@ -155,8 +147,8 @@
 
             <ImageButton
                 android:id="@+id/btnEditPassword"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="@android:color/transparent"
                 android:padding="6dp"
                 android:src="@android:drawable/ic_menu_edit" />
@@ -167,8 +159,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#252355"
-            android:text="Delogheaza-te"
+            android:text="@string/update_details"
             android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/update_user_details_button"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#252355"
+            android:text="@string/logout"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
             android:layout_marginHorizontal="16dp"
             android:id="@+id/logout_button"

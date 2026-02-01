@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity() {
 
         // Setează fragmentul inițial
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, HomeFragment()).commit()
+            .replace(R.id.container, AccountDetailsFragment()).commit()
 
         // BottomNavigationView listener
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, HomeFragment())
+                        .replace(R.id.container, AccountDetailsFragment())
                         .commit()
                     true
                 }
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.account -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, AdminFragment())
+                        .replace(R.id.container, UserDetailsFragment())
                         .commit()
                     true
                 }

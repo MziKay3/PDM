@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/home"
-        android:title="Acasa"
+        android:title="@string/home"
         android:icon="@drawable/home_panel"
         />
 
     <item android:id="@+id/payment"
-        android:title="Plati"
+        android:title="@string/payments"
         android:icon="@drawable/payment_panel"
         />
 
     <item android:id="@+id/account"
-        android:title="Contul meu"
+        android:title="@string/user_details"
         android:icon="@drawable/admin_panel"
         />
 </menu>

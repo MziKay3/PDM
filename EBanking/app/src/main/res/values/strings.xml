@@ -2,12 +2,39 @@
     <string name="app_name">E-Banking</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">Password</string>
+    <string name="user_details">User details</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone number</string>
+    <string name="update_details">Update details</string>
+    <string name="logout">Logout</string>
+    <string name="account_details">Account details</string>
+    <string name="balance">Balance:</string>
+    <string name="current_account">Current account:</string>
+    <string name="payments">Payments</string>
+    <string name="new_payment">New payment</string>
+    <string name="recurrent_payments">Recurrent payments</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="from_account">From account</string>
+    <string name="to_account">To account</string>
+    <string name="account_number">Account number</string>
+    <string name="sum">Sum</string>
+    <string name="ron">RON</string>
+    <string name="payment_details">Payment details</string>
+    <string name="transfer">Transfer</string>
+    <string name="recurrency">Recurrency</string>
+    <string name="make_payment">Make payment</string>
+    <string name="home">Home</string>
+    <string name="my_details">My account</string>
 
     <string-array name="recurrence_options">
-        <item>Fara recurenta</item>
-        <item>Zilnic</item>
-        <item>Saptamanal</item>
-        <item>Lunar</item>
-        <item>Anual</item>
+        <item>None</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Annual</item>
     </string-array>
 </resources>

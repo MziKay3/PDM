@@ -22,10 +22,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
 
-        usernameInput = findViewById(R.id.usernamel_input)
-        passwordInput = findViewById(R.id.passwordl_input)
+        usernameInput = findViewById(R.id.usernameInput)
+        passwordInput = findViewById(R.id.passwordInput)
         loginButton = findViewById(R.id.login_button)
-        registerLButton = findViewById(R.id.registerl_button)
+        registerLButton = findViewById(R.id.registerButton)
 
         loginButton.setOnClickListener {
 //            val username = usernameInput.text.toString()

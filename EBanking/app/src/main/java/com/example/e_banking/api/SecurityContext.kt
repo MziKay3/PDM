@@ -10,4 +10,8 @@ object SecurityContext {
     fun setToken(newTokenValue: String, accessor: SecurityContextAccessor) {
         token = newTokenValue
     }
+
+    fun logout(accessor: SecurityContextAccessor) {
+        token = ""
+    }
 }

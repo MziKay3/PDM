@@ -36,34 +36,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:hint="Username"
+            android:hint="@string/username"
             android:inputType="textPersonName"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
             android:padding="12dp"
             android:background="@drawable/rounded_corner"
-            android:id="@+id/usernamel_input"
+            android:id="@+id/usernameInput"
             android:singleLine="true"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
             android:padding="12dp"
             android:background="@drawable/rounded_corner"
-            android:id="@+id/passwordl_input"
+            android:id="@+id/passwordInput"
             android:singleLine="true"
             />
         
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/login"
             android:backgroundTint="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="16dp"
@@ -75,13 +75,13 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nu ai cont? Inregistreaza-te"
+            android:text="@string/register"
             android:backgroundTint="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="16dp"
             android:padding="16dp"
             android:textSize="18sp"
-            android:id="@+id/registerl_button"
+            android:id="@+id/registerButton"
             />
     </LinearLayout>
 </RelativeLayout>

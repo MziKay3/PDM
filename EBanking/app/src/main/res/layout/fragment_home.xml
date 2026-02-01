@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".AccountDetailsFragment">
 
     <TextView
         android:id="@+id/pageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pagina ta"
+        android:text="@string/account_details"
         android:textSize="30sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
@@ -30,17 +30,17 @@
 
 
         <TextView
-            android:id="@+id/textBalanta"
+            android:id="@+id/textBalance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Total Disponibil:"
+            android:text="@string/balance"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/ValoareBalanta"
+            android:id="@+id/balanceValue"
             android:layout_width="309dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -58,12 +58,12 @@
             android:background="@color/white" />
 
         <TextView
-            android:id="@+id/currentaccount"
+            android:id="@+id/currentAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Contul curent:"
+            android:text="@string/current_account"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
