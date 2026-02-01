@@ -2,12 +2,15 @@ package com.example.e_banking.api
 
 import com.example.e_banking.api.dtos.LoginDto
 import com.example.e_banking.api.dtos.RegisterDto
+import com.example.e_banking.api.dtos.UpdateUserDetails
 import com.example.e_banking.api.dtos.User
+import com.example.e_banking.api.dtos.UserDetails
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface RetrofitAPIDefinition {
 
@@ -22,4 +25,13 @@ interface RetrofitAPIDefinition {
 
     @POST("api/auth/register")
     fun register(@Body registerDto: RegisterDto): Call<Unit>
+
+    @GET("api/users/user-details")
+    fun getUserDetails(@Header("Authorization") authHeaderValue: String): Call<UserDetails>
+
+    @PUT("api/users/user-details")
+    fun updateUserDetails(
+        @Header("Authorization") authHeaderValue: String,
+        @Body updateUserDetails: UpdateUserDetails
+    ): Call<Unit>
 }
