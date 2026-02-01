@@ -1,5 +1,6 @@
 package com.example.e_banking
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,8 +11,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.text.InputType
+import android.widget.TextView
+import android.widget.Toast
+import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.SecurityContext
 import com.example.e_banking.api.SecurityContextAccessor
+import com.example.e_banking.api.callbacks.DefaultCallback
+import com.example.e_banking.api.dtos.UserDetails
 
 class AdminFragment : Fragment(), SecurityContextAccessor {
 
@@ -33,23 +39,36 @@ class AdminFragment : Fragment(), SecurityContextAccessor {
             requireActivity().finish()
         }
         val inputName = view.findViewById<EditText>(R.id.inputName)
-        val inputEmail = view.findViewById<EditText>(R.id.inputEmail)
+        val viewEmail = view.findViewById<TextView>(R.id.inputEmail)
         val inputPhone = view.findViewById<EditText>(R.id.inputPhone)
         val inputPassword = view.findViewById<EditText>(R.id.inputPassword)
 
+        val defaultCallback = DefaultCallback<UserDetails>(
+            onSuccess = {
+                response ->
+                inputName.setText(response.name)
+                viewEmail.text = response.email
+                inputPhone.setText(response.phoneNumber)
+                inputPassword.setText(response.password)
+            },
+            onFailure = {
+                response ->
+                response.errorBody()?.let {
+                    val message = it.string()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        )
+        APICaller.getUserDetails(defaultCallback)
+
         val btnEditName = view.findViewById<ImageButton>(R.id.btnEditName)
-        val btnEditEmail = view.findViewById<ImageButton>(R.id.btnEditEmail)
         val btnEditPhone = view.findViewById<ImageButton>(R.id.btnEditPhone)
         val btnEditPassword = view.findViewById<ImageButton>(R.id.btnEditPassword)
 
         btnEditName.setOnClickListener {
             inputName.isEnabled = true
             inputName.requestFocus()
-        }
-
-        btnEditEmail.setOnClickListener {
-            inputEmail.isEnabled = true
-            inputEmail.requestFocus()
         }
 
         btnEditPhone.setOnClickListener {

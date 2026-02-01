@@ -6,7 +6,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DefaultCallback<T>(
-    val onSuccess: (() -> Unit)? = null,
+    val onSuccess: ((T) -> Unit)? = null,
     val onFailure: ((response: Response<T?>) -> Unit)? = null)
     : Callback<T> {
 
@@ -19,8 +19,9 @@ class DefaultCallback<T>(
         }
 
         if (response.isSuccessful) {
-            val item = response.body()
-            onSuccess?.invoke()
+            response.body()?.let {
+                onSuccess?.invoke(it)
+            }
         } else {
             val code = response.code()
             onFailure?.invoke(response)

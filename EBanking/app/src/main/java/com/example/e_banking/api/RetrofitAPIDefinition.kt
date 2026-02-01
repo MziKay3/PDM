@@ -26,10 +26,10 @@ interface RetrofitAPIDefinition {
     @POST("api/auth/register")
     fun register(@Body registerDto: RegisterDto): Call<Unit>
 
-    @GET("api/users/user-details")
+    @GET("api/user/user-details")
     fun getUserDetails(@Header("Authorization") authHeaderValue: String): Call<UserDetails>
 
-    @PUT("api/users/user-details")
+    @PUT("api/user/user-details")
     fun updateUserDetails(
         @Header("Authorization") authHeaderValue: String,
         @Body updateUserDetails: UpdateUserDetails
