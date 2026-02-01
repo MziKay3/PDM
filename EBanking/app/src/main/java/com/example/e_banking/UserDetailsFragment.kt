@@ -19,7 +19,7 @@ import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.UpdateUserDetails
 import com.example.e_banking.api.dtos.UserDetails
 
-class AdminFragment : Fragment(), SecurityContextAccessor {
+class UserDetailsFragment : Fragment(), SecurityContextAccessor {
     lateinit var initialPhone: String
     lateinit var initialName: String
     lateinit var initialPassword: String

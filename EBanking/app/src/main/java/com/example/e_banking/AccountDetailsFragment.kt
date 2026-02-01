@@ -14,7 +14,7 @@ import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.AccountDetails
 
 
-class HomeFragment : Fragment() {
+class AccountDetailsFragment : Fragment() {
     private var isVisibleInfo=false
     lateinit var accountDetailsCallback: DefaultCallback<AccountDetails>
 
