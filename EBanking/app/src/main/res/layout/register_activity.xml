@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:hint="Nume si Prenume"
+            android:hint="@string/name"
             android:inputType="textPersonName"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -32,11 +32,11 @@
             android:background="@drawable/rounded_corner" />
 
         <EditText
-            android:id="@+id/phonenumber_input"
+            android:id="@+id/phoneNumberInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Telefon"
+            android:hint="@string/phone_number"
             android:inputType="phone"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -45,12 +45,12 @@
             android:background="@drawable/rounded_corner" />
 
         <EditText
-            android:id="@+id/usernamer_input"
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Email"
-            android:inputType="textPersonName"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
@@ -58,11 +58,11 @@
             android:background="@drawable/rounded_corner" />
 
         <EditText
-            android:id="@+id/passwordr_input"
+            android:id="@+id/passInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Parola"
+            android:hint="@string/password"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
@@ -73,7 +73,7 @@
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Inregistreaza-te"
+            android:text="@string/register"
             android:backgroundTint="@color/white"
             android:textColor="@color/black"
             android:layout_marginTop="16dp"

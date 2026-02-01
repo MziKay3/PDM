@@ -12,7 +12,7 @@
         android:id="@+id/pageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Plati"
+        android:text="@string/payments"
         android:textSize="30sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
@@ -36,7 +36,7 @@
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:text="Plată nouă" />
+            android:text="@string/new_payment" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipRecurring"
@@ -44,7 +44,7 @@
             android:layout_width="185dp"
 
             android:layout_height="wrap_content"
-            android:text="Plăți recurente" />
+            android:text="@string/recurrent_payments" />
 
     </com.google.android.material.chip.ChipGroup>
 

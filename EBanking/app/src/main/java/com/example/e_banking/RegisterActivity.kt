@@ -23,9 +23,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_activity)
 
-        usernameInputR = findViewById(R.id.usernamer_input)
-        passwordInputR = findViewById(R.id.passwordr_input)
-        phoneNumberInput= findViewById(R.id.phonenumber_input)
+        usernameInputR = findViewById(R.id.emailInput)
+        passwordInputR = findViewById(R.id.passInput)
+        phoneNumberInput= findViewById(R.id.phoneNumberInput)
         nameInput = findViewById(R.id.name_input)
         registerButton = findViewById(R.id.register_button)
 

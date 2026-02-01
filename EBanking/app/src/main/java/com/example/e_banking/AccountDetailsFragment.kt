@@ -24,7 +24,7 @@ class AccountDetailsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val balanceText = view.findViewById<TextView>(R.id.ValoareBalanta)
+        val balanceText = view.findViewById<TextView>(R.id.balanceValue)
         val ibanText = view.findViewById<TextView>(R.id.iban)
         val toggleBtn = view.findViewById<ImageView>(R.id.toggleVisibility)
 
