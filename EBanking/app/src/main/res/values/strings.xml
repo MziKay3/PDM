@@ -2,4 +2,12 @@
     <string name="app_name">E-Banking</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="recurrence_options">
+        <item>Fara recurenta</item>
+        <item>Zilnic</item>
+        <item>Saptamanal</item>
+        <item>Lunar</item>
+        <item>Anual</item>
+    </string-array>
 </resources>

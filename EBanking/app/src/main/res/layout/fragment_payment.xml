@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="24dp"
         app:selectionRequired="true"
         app:singleSelection="true">
@@ -52,6 +52,5 @@
         android:id="@+id/paymentContentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/chipGroup"
-        android:layout_marginTop="16dp"/>
+        android:layout_below="@id/chipGroup" />
 </RelativeLayout>

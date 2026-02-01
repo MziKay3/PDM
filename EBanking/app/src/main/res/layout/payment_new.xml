@@ -16,7 +16,7 @@
             android:text="Din contul"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="1dp"/>
 
         <TextView
             android:id="@+id/fromAccountNumber"
@@ -54,6 +54,26 @@
             android:padding="12dp"
             android:layout_marginTop="4dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sumă"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/paymentAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="RON"
+            android:background="@drawable/rounded_corner"
+            android:padding="12dp"
+            android:layout_marginTop="4dp"
+            android:inputType="numberDecimal"
+            android:digits="0123456789,"
+            android:maxLength="15" />
+
         <!-- Detalii Plată -->
         <TextView
             android:layout_width="wrap_content"
@@ -64,31 +84,33 @@
             android:layout_marginTop="16dp"/>
 
         <EditText
-            android:id="@+id/paymentAmount"
+            android:id="@+id/paymentDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sumă"
+            android:hint="Transfer"
             android:background="@drawable/rounded_corner"
             android:padding="12dp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:maxLines="4" />
 
-        <!-- Data Plății -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data Plății"
+            android:text="Recurență"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp"/>
 
-        <EditText
-            android:id="@+id/paymentDate"
+        <Spinner
+            android:id="@+id/recurrenceSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ex: 23.11.2025"
+            android:layout_height="48dp"
             android:background="@drawable/rounded_corner"
+            android:layout_marginTop="4dp"
             android:padding="12dp"
-            android:layout_marginTop="4dp"/>
+            android:entries="@array/recurrence_options" />
 
         <!-- Buton Continuă -->
         <Button
