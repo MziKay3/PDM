@@ -20,7 +20,11 @@ import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.UserDetails
 
 class AdminFragment : Fragment(), SecurityContextAccessor {
+    var initialPhone: String? = null
+    var initialName: String? = null
+    var initialPassword: String? = null
 
+    var onUserDetailsGetCallback: DefaultCallback<UserDetails>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +47,20 @@ class AdminFragment : Fragment(), SecurityContextAccessor {
         val inputPhone = view.findViewById<EditText>(R.id.inputPhone)
         val inputPassword = view.findViewById<EditText>(R.id.inputPassword)
 
-        val defaultCallback = DefaultCallback<UserDetails>(
+        onUserDetailsGetCallback = DefaultCallback<UserDetails>(
             onSuccess = {
                 response ->
+
                 inputName.setText(response.name)
+                initialName = response.name
+
                 viewEmail.text = response.email
+
                 inputPhone.setText(response.phoneNumber)
+                initialPhone = response.phoneNumber
+
                 inputPassword.setText(response.password)
+                initialPassword = response.password
             },
             onFailure = {
                 response ->
@@ -60,27 +71,41 @@ class AdminFragment : Fragment(), SecurityContextAccessor {
                 }
             }
         )
-        APICaller.getUserDetails(defaultCallback)
+        APICaller.getUserDetails(onUserDetailsGetCallback!!)
 
         val btnEditName = view.findViewById<ImageButton>(R.id.btnEditName)
         val btnEditPhone = view.findViewById<ImageButton>(R.id.btnEditPhone)
         val btnEditPassword = view.findViewById<ImageButton>(R.id.btnEditPassword)
 
         btnEditName.setOnClickListener {
-            inputName.isEnabled = true
-            inputName.requestFocus()
+            if (!inputName.isEnabled) {
+                inputName.requestFocus()
+            } else {
+                inputName.setText(initialName)
+            }
+            inputName.isEnabled = !inputName.isEnabled
         }
 
         btnEditPhone.setOnClickListener {
-            inputPhone.isEnabled = true
-            inputPhone.requestFocus()
+            if (!inputPhone.isEnabled) {
+                inputPhone.requestFocus()
+            } else {
+                inputPhone.setText(initialPhone)
+            }
+            inputPhone.isEnabled = !inputPhone.isEnabled
         }
 
         btnEditPassword.setOnClickListener {
-            inputPassword.isEnabled = true
-            inputPassword.inputType =
-                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            inputPassword.requestFocus()
+            if (!inputPassword.isEnabled) {
+                inputPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                inputPassword.requestFocus()
+            } else {
+                inputPassword.setText(initialPassword)
+                inputPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+            inputPassword.isEnabled = !inputPassword.isEnabled
         }
 
         return view
