@@ -42,7 +42,7 @@ interface RetrofitAPIDefinition {
     fun getAccountDetails(@Header("Authorization") authHeaderValue: String):
             Call<AccountDetails>
 
-    @GET("api/payment/one-time")
+    @POST("api/payment/one-time")
     fun makeOneTimePayment(
         @Header("Authorization") authHeaderValue: String,
         @Body paymentRequest: PaymentRequest

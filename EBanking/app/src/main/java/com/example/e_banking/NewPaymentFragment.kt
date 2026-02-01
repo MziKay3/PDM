@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.AccountDetails
+import com.example.e_banking.api.dtos.PaymentRequest
 import kotlin.properties.Delegates
 
 class NewPaymentFragment : Fragment(R.layout.payment_new) {
@@ -68,5 +69,52 @@ class NewPaymentFragment : Fragment(R.layout.payment_new) {
 
                 override fun onNothingSelected(parent: AdapterView<*>) {}
             }
+        val oneTimePaymentCallback = DefaultCallback<Unit>(
+            onSuccess = {
+                _ ->
+                clearFields()
+                Toast.makeText(
+                    requireContext(),
+                    "Payment was successful",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+            },
+            onFailure = {
+                response ->
+                response.errorBody()?.let {
+                    val message = it.string()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        )
+
+        continueButton.setOnClickListener {
+            if (selectedRecurrence == Recurrence.NONE) {
+                val fromAccount = fromTextView.text.toString()
+                val toAccount = beneficiaryAccountEditText.text.toString()
+                val toAccountName = beneficiaryNameEditText.text.toString()
+                val details = paymentDetailsEditText.text.toString()
+                val amount = paymentAmountEditText.text.toString().toFloat()
+
+                val oneTimePaymentRequest = PaymentRequest(
+                    fromIban = fromAccount,
+                    toIban = toAccount,
+                    toAccountName = toAccountName,
+                    amount = amount,
+                    details = details
+                )
+                APICaller.makeOneTimePayment(oneTimePaymentRequest, oneTimePaymentCallback)
+            }
+        }
+    }
+
+    private fun clearFields() {
+        beneficiaryNameEditText.setText("")
+        beneficiaryAccountEditText.setText("")
+        paymentAmountEditText.setText("")
+        paymentDetailsEditText.setText("")
+        recurrenceSpinner.setSelection(0)
     }
 }
