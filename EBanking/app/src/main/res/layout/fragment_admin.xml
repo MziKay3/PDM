@@ -163,7 +163,7 @@
             android:text="Updatează datele"
             android:layout_marginTop="30dp"
             android:layout_marginHorizontal="16dp"
-            android:id="@+id/update_button"
+            android:id="@+id/update_user_details_button"
             />
         <Button
             android:layout_width="match_parent"
