@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.callbacks.LoginCallback
+import com.example.e_banking.api.dtos.AccountDetails
 import com.example.e_banking.api.dtos.LoginDto
 import com.example.e_banking.api.dtos.RegisterDto
 import com.example.e_banking.api.dtos.UpdateUserDetails
@@ -55,5 +56,10 @@ object APICaller {
             SecurityContext.authHeaderValue,
             updateUserDetails
         ).enqueue(callback)
+    }
+
+    fun getAccountDetails(callback: DefaultCallback<AccountDetails>) {
+        api.getAccountDetails(SecurityContext.authHeaderValue)
+            .enqueue(callback)
     }
 }

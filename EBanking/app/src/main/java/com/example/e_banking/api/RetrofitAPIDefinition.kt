@@ -1,5 +1,6 @@
 package com.example.e_banking.api
 
+import com.example.e_banking.api.dtos.AccountDetails
 import com.example.e_banking.api.dtos.LoginDto
 import com.example.e_banking.api.dtos.RegisterDto
 import com.example.e_banking.api.dtos.UpdateUserDetails
@@ -34,4 +35,7 @@ interface RetrofitAPIDefinition {
         @Header("Authorization") authHeaderValue: String,
         @Body updateUserDetails: UpdateUserDetails
     ): Call<Unit>
+
+    @GET("api/account/account-details")
+    fun getAccountDetails(@Header("Authorization") authHeaderValue: String): Call<AccountDetails>
 }

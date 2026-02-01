@@ -1,16 +1,22 @@
 package com.example.e_banking
 
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.example.e_banking.api.APICaller
+import com.example.e_banking.api.callbacks.DefaultCallback
+import com.example.e_banking.api.dtos.AccountDetails
 
 
 class HomeFragment : Fragment() {
     private var isVisibleInfo=false
+    lateinit var accountDetailsCallback: DefaultCallback<AccountDetails>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,27 +28,37 @@ class HomeFragment : Fragment() {
         val ibanText = view.findViewById<TextView>(R.id.iban)
         val toggleBtn = view.findViewById<ImageView>(R.id.toggleVisibility)
 
-        // Date reale (aici pui tu ce vrei)
-        val realBalance = "15230.55 RON"
-        val realIban = "RO49AAAA1B31007593840000"
+        accountDetailsCallback = DefaultCallback(
+            onSuccess = {
+                response ->
+                balanceText.text = response.balance.toString()
+                ibanText.text = response.iban
+            },
+            onFailure = {
+                response ->
+                response.errorBody()?.let {
+                    val message = it.string()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        )
+        APICaller.getAccountDetails(accountDetailsCallback)
 
-        // La început ASCUNSE (cu stelute)
-        balanceText.text = "******"
-        ibanText.text = "***********************"
         toggleBtn.setImageResource(R.drawable.ic_visibility_off)
+        balanceText.transformationMethod = PasswordTransformationMethod.getInstance()
+        ibanText.transformationMethod = PasswordTransformationMethod.getInstance()
 
         toggleBtn.setOnClickListener {
             isVisibleInfo = !isVisibleInfo
-
             if (isVisibleInfo) {
-                // Afișează datele reale
-                balanceText.text = realBalance
-                ibanText.text = realIban
+                APICaller.getAccountDetails(accountDetailsCallback)
+                balanceText.transformationMethod = null
+                ibanText.transformationMethod = null
                 toggleBtn.setImageResource(R.drawable.ic_visibility)
             } else {
-                // Ascunde cu stelute
-                balanceText.text = "******"
-                ibanText.text = "***********************"
+                balanceText.transformationMethod = PasswordTransformationMethod.getInstance()
+                ibanText.transformationMethod = PasswordTransformationMethod.getInstance()
                 toggleBtn.setImageResource(R.drawable.ic_visibility_off)
             }
         }
