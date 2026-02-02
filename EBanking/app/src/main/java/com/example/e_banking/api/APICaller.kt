@@ -6,8 +6,11 @@ import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.callbacks.LoginCallback
 import com.example.e_banking.api.dtos.AccountDetails
 import com.example.e_banking.api.dtos.LoginDto
-import com.example.e_banking.api.dtos.PaymentRequest
+import com.example.e_banking.api.dtos.OneTimePaymentRequest
+import com.example.e_banking.api.dtos.RecurringPaymentDto
+import com.example.e_banking.api.dtos.RecurringPaymentRequest
 import com.example.e_banking.api.dtos.RegisterDto
+import com.example.e_banking.api.dtos.TransactionDto
 import com.example.e_banking.api.dtos.UpdateUserDetails
 import com.example.e_banking.api.dtos.UserDetails
 import retrofit2.Call
@@ -34,7 +37,7 @@ object APICaller {
                     Toast.makeText(context, "success!", Toast.LENGTH_LONG).show()
                 }
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Toast.makeText(context, "not succes!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "not success!", Toast.LENGTH_LONG).show()
                 }
             }
         )
@@ -52,11 +55,13 @@ object APICaller {
         api.getUserDetails(SecurityContext.authHeaderValue).enqueue(callback)
     }
 
-    fun updateUserDetails(updateUserDetails: UpdateUserDetails, callback: DefaultCallback<Unit>) {
+    fun updateUserDetails(
+        updateUserDetails: UpdateUserDetails,
+        callback: DefaultCallback<Unit>) {
         api.updateUserDetails(
             SecurityContext.authHeaderValue,
-            updateUserDetails
-        ).enqueue(callback)
+            updateUserDetails)
+            .enqueue(callback)
     }
 
     fun getAccountDetails(callback: DefaultCallback<AccountDetails>) {
@@ -64,10 +69,40 @@ object APICaller {
             .enqueue(callback)
     }
 
-    fun makeOneTimePayment(paymentRequest: PaymentRequest, callback: DefaultCallback<Unit>) {
+    fun makeOneTimePayment(
+        oneTimePaymentRequest: OneTimePaymentRequest,
+        callback: DefaultCallback<Unit>) {
         api.makeOneTimePayment(
             SecurityContext.authHeaderValue,
+            oneTimePaymentRequest)
+            .enqueue(callback)
+    }
+
+    fun makeRecurringPayment(
+        paymentRequest: RecurringPaymentRequest,
+        callback: DefaultCallback<Unit>) {
+        api.makeRecurringPayment(
+            SecurityContext.authHeaderValue,
             paymentRequest)
+            .enqueue(callback)
+    }
+
+    fun deleteRecurringPayment(
+        paymentId: Int,
+        callback: DefaultCallback<Unit>) {
+        api.deleteRecurringPayment(
+            SecurityContext.authHeaderValue,
+            paymentId)
+            .enqueue(callback)
+    }
+
+    fun getTransactions(callback: DefaultCallback<List<TransactionDto>>) {
+        api.getTransactions(SecurityContext.authHeaderValue)
+            .enqueue(callback)
+    }
+
+    fun getRecurringPayments(callback: DefaultCallback<List<RecurringPaymentDto>>) {
+        api.getRecurringPayments(SecurityContext.authHeaderValue)
             .enqueue(callback)
     }
 }

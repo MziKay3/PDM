@@ -30,35 +30,31 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
 //            val username = usernameInput.text.toString()
 //            val password = passwordInput.text.toString()
-            val username = "admin@gmail.com"
+            val username = "filip@gmail.com"
             val password = "pass"
 
             Log.i("Login", "Username: $username, Password: $password")
 
-//            if (username.isEmpty() || password.isEmpty()) {
-//                Toast.makeText(this, "Completează toate câmpurile", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val loginCallback = LoginCallback(
                 {
-                    Log.i("LoginDebug", "Autentificare reușită ✅")
-                    Toast.makeText(this, "Login cu succes!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 },
                 {
-                    Log.i("LoginDebug", "Autentificare eșuată ❌")
-                    Toast.makeText(this, "Username sau parola incorecte", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show()
                 }
             )
             val loginDto = LoginDto(email = username, password = password)
             APICaller.login(loginDto, loginCallback)
         }
         registerLButton.setOnClickListener {
-            // Navigare către RegisterActivity
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }

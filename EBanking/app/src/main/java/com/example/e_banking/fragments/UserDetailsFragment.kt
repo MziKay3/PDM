@@ -1,4 +1,4 @@
-package com.example.e_banking
+package com.example.e_banking.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,8 @@ import android.widget.ImageButton
 import android.text.InputType
 import android.widget.TextView
 import android.widget.Toast
+import com.example.e_banking.LoginActivity
+import com.example.e_banking.R
 import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.SecurityContext
 import com.example.e_banking.api.SecurityContextAccessor
