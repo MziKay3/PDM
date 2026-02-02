@@ -15,12 +15,14 @@ import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.AccountDetails
 import com.example.e_banking.api.dtos.OneTimePaymentRequest
+import com.example.e_banking.api.dtos.RecurringPaymentRequest
 import kotlin.properties.Delegates
 
 class NewPaymentFragment : Fragment(R.layout.payment_new) {
 
     private var balance by Delegates.notNull<Float>()
     private var selectedRecurrence: Recurrence = Recurrence.NONE
+    private lateinit var selectedRecurrenceString: String
 
     private lateinit var fromTextView: TextView
     private lateinit var beneficiaryNameEditText: EditText
@@ -67,11 +69,13 @@ class NewPaymentFragment : Fragment(R.layout.payment_new) {
                     position: Int,
                     id: Long) {
                     selectedRecurrence = recurrenceValues[position]
+                    selectedRecurrenceString =
+                        recurrenceSpinner.getItemAtPosition(position).toString()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {}
             }
-        val oneTimePaymentCallback = DefaultCallback<Unit>(
+        val paymentCallback = DefaultCallback<Unit>(
             onSuccess = {
                 _ ->
                 clearFields()
@@ -93,13 +97,13 @@ class NewPaymentFragment : Fragment(R.layout.payment_new) {
         )
 
         continueButton.setOnClickListener {
-            if (selectedRecurrence == Recurrence.NONE) {
-                val fromAccount = fromTextView.text.toString()
-                val toAccount = beneficiaryAccountEditText.text.toString()
-                val toAccountName = beneficiaryNameEditText.text.toString()
-                val details = paymentDetailsEditText.text.toString()
-                val amount = paymentAmountEditText.text.toString().toFloat()
+            val fromAccount = fromTextView.text.toString()
+            val toAccount = beneficiaryAccountEditText.text.toString()
+            val toAccountName = beneficiaryNameEditText.text.toString()
+            val details = paymentDetailsEditText.text.toString()
+            val amount = paymentAmountEditText.text.toString().toFloat()
 
+            if (selectedRecurrence == Recurrence.NONE) {
                 val oneTimePaymentRequest = OneTimePaymentRequest(
                     fromIban = fromAccount,
                     toIban = toAccount,
@@ -107,7 +111,17 @@ class NewPaymentFragment : Fragment(R.layout.payment_new) {
                     amount = amount,
                     details = details
                 )
-                APICaller.makeOneTimePayment(oneTimePaymentRequest, oneTimePaymentCallback)
+                APICaller.makeOneTimePayment(oneTimePaymentRequest, paymentCallback)
+            } else {
+                val recurringPaymentRequest = RecurringPaymentRequest(
+                    fromIban = fromAccount,
+                    toIban = toAccount,
+                    toAccountName = toAccountName,
+                    amount = amount,
+                    details = details,
+                    recurrency = selectedRecurrenceString
+                )
+                APICaller.makeRecurringPayment(recurringPaymentRequest, paymentCallback)
             }
         }
     }
