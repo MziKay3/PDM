@@ -15,6 +15,7 @@ class TransactionAdapter(
 ) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val sender: TextView = view.findViewById(R.id.tvSender)
         val receiver: TextView = view.findViewById(R.id.tvReceiver)
         val direction: TextView = view.findViewById(R.id.tvDirection)
         val amount: TextView = view.findViewById(R.id.tvAmount)
@@ -31,6 +32,7 @@ class TransactionAdapter(
 
         val isIncoming = item.receiverIban == currentAccountIban
 
+        "From: ${item.senderIban}".also { holder.sender.text = it }
         "To: ${item.receiverIban}".also { holder.receiver.text = it }
 
         holder.direction.text =

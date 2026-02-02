@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
 //            val username = usernameInput.text.toString()
 //            val password = passwordInput.text.toString()
-            val username = "admin@gmail.com"
+            val username = "filip@gmail.com"
             val password = "pass"
 
             Log.i("Login", "Username: $username, Password: $password")
