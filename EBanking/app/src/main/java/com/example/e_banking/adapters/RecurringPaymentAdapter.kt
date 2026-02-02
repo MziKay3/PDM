@@ -1,12 +1,12 @@
-package com.example.e_banking
+package com.example.e_banking.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.e_banking.R
 import com.example.e_banking.api.dtos.RecurringPaymentDto
 import java.text.SimpleDateFormat
 import java.util.Date

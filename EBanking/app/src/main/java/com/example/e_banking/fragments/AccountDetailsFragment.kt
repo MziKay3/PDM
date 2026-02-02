@@ -1,4 +1,4 @@
-package com.example.e_banking
+package com.example.e_banking.fragments
 
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.e_banking.R
 import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.AccountDetails

@@ -1,4 +1,4 @@
-package com.example.e_banking
+package com.example.e_banking.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.e_banking.R
+import com.example.e_banking.enums.Recurrence
 import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.AccountDetails

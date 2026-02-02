@@ -1,8 +1,9 @@
-package com.example.e_banking
+package com.example.e_banking.fragments
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.example.e_banking.R
 import com.google.android.material.chip.Chip
 
 class PaymentFragment : Fragment(R.layout.fragment_payment) {
