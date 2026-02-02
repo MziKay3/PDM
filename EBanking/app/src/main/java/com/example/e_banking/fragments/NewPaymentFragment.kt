@@ -14,7 +14,7 @@ import com.example.e_banking.enums.Recurrence
 import com.example.e_banking.api.APICaller
 import com.example.e_banking.api.callbacks.DefaultCallback
 import com.example.e_banking.api.dtos.AccountDetails
-import com.example.e_banking.api.dtos.PaymentRequest
+import com.example.e_banking.api.dtos.OneTimePaymentRequest
 import kotlin.properties.Delegates
 
 class NewPaymentFragment : Fragment(R.layout.payment_new) {
@@ -100,7 +100,7 @@ class NewPaymentFragment : Fragment(R.layout.payment_new) {
                 val details = paymentDetailsEditText.text.toString()
                 val amount = paymentAmountEditText.text.toString().toFloat()
 
-                val oneTimePaymentRequest = PaymentRequest(
+                val oneTimePaymentRequest = OneTimePaymentRequest(
                     fromIban = fromAccount,
                     toIban = toAccount,
                     toAccountName = toAccountName,
