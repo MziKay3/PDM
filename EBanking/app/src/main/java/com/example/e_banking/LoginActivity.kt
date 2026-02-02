@@ -42,16 +42,13 @@ class LoginActivity : AppCompatActivity() {
 
             val loginCallback = LoginCallback(
                 {
-                    Log.i("LoginDebug", "Autentificare reușită ✅")
-                    Toast.makeText(this, "Login cu succes!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 },
                 {
-                    Log.i("LoginDebug", "Autentificare eșuată ❌")
-                    Toast.makeText(this, "Username sau parola incorecte", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show()
                 }
             )
             val loginDto = LoginDto(email = username, password = password)
