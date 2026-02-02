@@ -35,10 +35,10 @@ class LoginActivity : AppCompatActivity() {
 
             Log.i("Login", "Username: $username, Password: $password")
 
-//            if (username.isEmpty() || password.isEmpty()) {
-//                Toast.makeText(this, "Completează toate câmpurile", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val loginCallback = LoginCallback(
                 {
@@ -55,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
             APICaller.login(loginDto, loginCallback)
         }
         registerLButton.setOnClickListener {
-            // Navigare către RegisterActivity
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
