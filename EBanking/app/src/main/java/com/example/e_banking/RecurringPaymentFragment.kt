@@ -13,7 +13,7 @@ class RecurringPaymentFragment : Fragment(R.layout.payment_recurring) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val payments = listOf(
+        val payments = mutableListOf(
             RecurringPaymentDto(
                 id = 1,
                 receiverIban = "RO49AAAA...",
@@ -24,6 +24,9 @@ class RecurringPaymentFragment : Fragment(R.layout.payment_recurring) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvRecurringPayments)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = RecurringPaymentAdapter(payments)
+        recyclerView.adapter = RecurringPaymentAdapter(payments,
+            onDeleteClick = {
+                paymentDto -> {}
+            })
     }
 }

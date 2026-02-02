@@ -30,6 +30,7 @@
     <string name="home">Home</string>
     <string name="my_details">My account</string>
     <string name="active_recurring_payments">Active recurring payments</string>
+    <string name="delete">delete</string>
 
     <string-array name="recurrence_options">
         <item>None</item>

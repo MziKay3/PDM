@@ -3,6 +3,8 @@ package com.example.e_banking
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_banking.api.dtos.RecurringPaymentDto
@@ -11,7 +13,8 @@ import java.util.Date
 import java.util.Locale
 
 class RecurringPaymentAdapter(
-    private val items: List<RecurringPaymentDto>
+    private val items: MutableList<RecurringPaymentDto>,
+    private val onDeleteClick: (RecurringPaymentDto) -> Unit
 ) : RecyclerView.Adapter<RecurringPaymentAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,6 +22,7 @@ class RecurringPaymentAdapter(
         val amount: TextView = view.findViewById(R.id.tvAmount)
         val frequency: TextView = view.findViewById(R.id.tvFrequency)
         val nextPayment: TextView = view.findViewById(R.id.tvNextPayment)
+        val deleteButton: ImageButton = view.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,9 +38,19 @@ class RecurringPaymentAdapter(
         "SUM: ${item.amount} RON".also { holder.amount.text = it }
         "Recurrency: ${item.recurrency}".also { holder.frequency.text = it }
         "Next payment date: ${formatDate(item.nextPayment)}".also { holder.nextPayment.text = it }
+
+        holder.deleteButton.setOnClickListener {
+            onDeleteClick(item)
+            removeItem(position)
+        }
     }
 
     override fun getItemCount(): Int = items.size
+
+    private fun removeItem(position: Int) {
+        items.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
     private fun formatDate(date: Date): String {
         val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
