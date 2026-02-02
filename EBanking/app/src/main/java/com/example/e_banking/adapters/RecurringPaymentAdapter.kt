@@ -40,8 +40,12 @@ class RecurringPaymentAdapter(
         "Next payment date: ${formatDate(item.nextPayment)}".also { holder.nextPayment.text = it }
 
         holder.deleteButton.setOnClickListener {
-            onDeleteClick(item)
-            removeItem(position)
+            val adapterPosition = holder.bindingAdapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                val item = items[adapterPosition]
+                onDeleteClick(item)
+                removeItem(adapterPosition)
+            }
         }
     }
 
@@ -52,8 +56,10 @@ class RecurringPaymentAdapter(
         notifyItemRemoved(position)
     }
 
-    private fun formatDate(date: Date): String {
-        val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return formatter.format(date)
+    private fun formatDate(date: String): String {
+        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS", Locale.US)
+        val output = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+
+        return output.format(input.parse(date)!!)
     }
 }
